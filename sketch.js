@@ -28,17 +28,12 @@ let angularVelocityMin = 20;
 let angularVelocityStep = 1;
 
 let gui;
-let pseudoGui;
-let hello = 0;
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 
-	pseudoGui = createGui("Length")
-	pseudoGui.addGlobals('hello')
-	//create the GUI
-	gui = createGui("Succ");
-	gui.addGlobals('dimension', 'length', 'angularVelocity', 'pseudoGui')
+	gui = createGui("Title");
+	gui.addGlobals('dimension', 'length', 'angularVelocity')
 
 	s = sin(PI/60);
 	c = cos(PI/60);
