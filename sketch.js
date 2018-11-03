@@ -2,7 +2,7 @@ let orientation = Matrix.iden(5);
 let s;
 let c;
 let rot1, rot2;
-let h = new HyperPrism([200, 100, 300, 50, 150]);
+let h = new HyperPrism([200, 100, 300]);
 
 //gui variables
 let dimension = 2;
@@ -56,6 +56,12 @@ function setup() {
 
 function draw() {
 	background(220);
-	h.update(rot3.mult(rot1.mult(rot2.mult(rot4))));
+	let v = new Vector([1, 1, 1]).normalized();
+	let u = new Vector([1, 1, -1]).normalized();
+	let theta = PI/60;
+	let rot = Matrix.iden(3).add(v.outer(u).sub(u.outer(v)).scale(sin(theta))).add(
+		u.outer(u).add(v.outer(v)).scale(cos(theta) - 1));
+	h.update(rot);
+	//h.update(rot3.mult(rot1.mult(rot2.mult(rot4))));
 	h.render();
 }
