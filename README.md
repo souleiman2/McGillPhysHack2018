@@ -1,2 +1,2 @@
 # McGillPhysHack2018
-This is a n dimensionnal gyroscopic precession
+This is an angular momentum simulation in arbitrary dimensions.
