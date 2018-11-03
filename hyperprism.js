@@ -19,8 +19,8 @@ class HyperPrism {
 	}
 
 
-	update(rotationMatrix, dt) {
-		//rotate orientation
+	update(rotationMatrix) {
+		orientation = rotationMatrix.mult(orientation);
 	}
 
 	differByOne(p1, p2){
@@ -36,17 +36,20 @@ class HyperPrism {
 	render() {
 		translate(width/2, height/2);
 
+		let newPoints = this.points.map(p => orientation.vectMult(new Vector(p)));
+
+
 		for (let i = 0; i < this.points.length; i++) {
-			let x = this.points[i][0];
-			let y = this.points[i][1];
+			let x = newPoints[i].get(0);
+			let y = newPoints[i].get(1);
 			ellipse(x, y, 4); 
  		}
 
 		for (let i = 0; i < this.points.length; i++) {
 			for (let j = 0; j < this.points.length; j++) {
 				if(this.differByOne(this.points[i], this.points[j])) {
-					line(this.points[i][0], this.points[i][1],
-						this.points[j][0], this.points[j][1]);
+					line(newPoints[i].get(0), newPoints[i].get(1),
+						newPoints[j].get(0), newPoints[j].get(1));
 				}
 			}
 		}
