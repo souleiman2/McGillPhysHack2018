@@ -32,8 +32,7 @@ let gui;
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 
-	//create the GUI
-	gui = createGui("Succ");
+	gui = createGui("Title");
 	gui.addGlobals('dimension', 'length', 'angularVelocity')
 
 	s = sin(PI/60);
