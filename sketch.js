@@ -28,17 +28,13 @@ let angularVelocityMin = 20;
 let angularVelocityStep = 1;
 
 let gui;
-let pseudoGui;
-let hello = 0;
 
 function setup() {
 	createCanvas(windowWidth, windowHeight);
 
-	pseudoGui = createGui("Length")
-	pseudoGui.addGlobals('hello')
 	//create the GUI
 	gui = createGui("Succ");
-	gui.addGlobals('dimension', 'length', 'angularVelocity', 'pseudoGui')
+	gui.addGlobals('dimension', 'length', 'angularVelocity')
 
 	s = sin(PI/60);
 	c = cos(PI/60);
@@ -61,7 +57,9 @@ function draw() {
 	let theta = PI/60;
 	let rot = Matrix.iden(3).add(v.outer(u).sub(u.outer(v)).scale(sin(theta))).add(
 		u.outer(u).add(v.outer(v)).scale(cos(theta) - 1));
-	h.update(rot);
+	for(let i = 0; i < 100; i++) {
+		h.update(rot);
+	}
 	//h.update(rot3.mult(rot1.mult(rot2.mult(rot4))));
 	h.render();
 }
