@@ -55,5 +55,19 @@ class Matrix{
 		}
 		return new Matrix(temp_mat)
 	}
+	static iden(size){
+		let temp_mat = []
+		for(let i = 0; i<size; i++){
+			temp_mat.push([])
+			for(let j= 0; j<size; j++){
+				if(i==j){
+					temp_mat[i].push(1)
+				}else{
+					temp_mat[i].push(0)
+				}
+			}
+		}
+		return new Matrix(temp_mat)
+	}
 
 }
