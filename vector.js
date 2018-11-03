@@ -37,6 +37,9 @@ class Vector{
 		}
 		return Math.sqrt(sum);
 	}
+	normalized(){
+		return this.scale(1/this.norm());
+	}
 	dot(otherVector){
 		let sum = 0;
 		for(let i = 0; i<this.n; i++){
@@ -44,7 +47,7 @@ class Vector{
 		}
 		return sum;
 	}
-	outter(otherVector){
+	outer(otherVector){
 		let new_tab = []
 		for(let i = 0; i<this.n; i++){
 			new_tab.push([])
