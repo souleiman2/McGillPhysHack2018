@@ -13,13 +13,13 @@ class Matrix{
 		let temp_mat = []
 		for(let i = 0; i<this.n; i++){
 			temp_mat.push([])
-			sum = 0
 			for(let k = 0; k<this.n; k++){
+				let sum = 0;
 				for (let j = 0; j<this.n; j++){
-					sum += this.get(i,j) * otherMatrix.get(j,k)
+					sum += this.get(i,j) * otherMatrix.get(j,k);
 				}
+				temp_mat[i].push(sum);
 			}
-			temp_mat[i].push(sum);
 		}
 		return new Matrix(temp_mat);
 	}
@@ -27,7 +27,7 @@ class Matrix{
 	vect_mult(vect){
 		let list = []
 		for(let i = 0; i<this.n; i++){
-			sum = 0
+			let sum = 0
 			for(let j = 0; j<this.n; j++){
 				sum += this.get(i,j) * vect.get(j);
 			}

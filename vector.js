@@ -10,7 +10,7 @@ class Vector{
 		return this.n
 	}
 	add(otherVector){
-		new_tab = []
+		let new_tab = []
 		for(let i = 0; i<otherVector.n; i++){
 			new_tab.push(otherVector.get(i) + this.get(i));
 		}
@@ -21,8 +21,8 @@ class Vector{
 	}
 	scale(c){
 		let temp_list = this.values.slice();
-		for(let i = 0; i<this.values.n; i++){
-			this.temp_list *= c;
+		for(let i = 0; i<this.n; i++){
+			temp_list[i] *= c;
 		}
 		return new Vector(temp_list)
 	}
@@ -31,11 +31,18 @@ class Vector{
 		return this.add(otherVector.neg())
 	}
 	norm(){
-		let lol = 0;
+		let sum = 0;
 		for(let i = 0; i<this.n; i++){
-			lol += this.values[i];
+			sum += this.get(i) ** 2;
 		}
-		return Math.sqrt(lol);
+		return Math.sqrt(sum);
+	}
+	dot(otherVector){
+		let sum = 0;
+		for(let i = 0; i<this.n; i++){
+			sum += this.get(i) * otherVector.get(i)
+		}
+		return sum;
 	}
 
 }
