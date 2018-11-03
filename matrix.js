@@ -24,7 +24,7 @@ class Matrix{
 		return new Matrix(temp_mat);
 	}
 
-	vect_mult(vect){
+	vectMult(vect){
 		let list = []
 		for(let i = 0; i<this.n; i++){
 			let sum = 0
