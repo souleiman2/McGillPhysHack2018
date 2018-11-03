@@ -24,7 +24,7 @@ class Matrix{
 		return new Matrix(temp_mat);
 	}
 
-	vect_mult(vect){
+	vectMult(vect){
 		let list = []
 		for(let i = 0; i<this.n; i++){
 			let sum = 0
@@ -34,6 +34,26 @@ class Matrix{
 			list.push(sum);
 		}
 		return new Vector(list);
+	}
+	scalar(c){
+		let temp_mat = []
+		for(let i = 0; i<this.n; i++){
+			temp_mat.push([])
+			for(let j = 0; j<this.n; j++){
+				temp_mat[i].push(this.get(i,j) * c);
+			}
+		}
+		return new Matrix(temp_mat)
+	}
+	add(otherMatrix){
+		let temp_mat = []
+		for(let i = 0; i<this.n; i++){
+			temp_mat.push([])
+			for(let j = 0; j<this.n; j++){
+				temp_mat[i].push(this.get(i,j) + otherMatrix.get(i,j));
+			}
+		}
+		return new Matrix(temp_mat)
 	}
 
 }

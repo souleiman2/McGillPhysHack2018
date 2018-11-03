@@ -44,5 +44,15 @@ class Vector{
 		}
 		return sum;
 	}
+	outter(otherVector){
+		let new_tab = []
+		for(let i = 0; i<this.n; i++){
+			new_tab.push([])
+			for(let j = 0; j<this.n; j++){
+				new_tab[i].push(this.get(i) * otherVector.get(j));
+			}
+		}
+		return new Matrix(new_tab)
+	}
 
 }
