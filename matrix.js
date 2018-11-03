@@ -35,5 +35,39 @@ class Matrix{
 		}
 		return new Vector(list);
 	}
+	scalar(c){
+		let temp_mat = []
+		for(let i = 0; i<this.n; i++){
+			temp_mat.push([])
+			for(let j = 0; j<this.n; j++){
+				temp_mat[i].push(this.get(i,j) * c);
+			}
+		}
+		return new Matrix(temp_mat)
+	}
+	add(otherMatrix){
+		let temp_mat = []
+		for(let i = 0; i<this.n; i++){
+			temp_mat.push([])
+			for(let j = 0; j<this.n; j++){
+				temp_mat[i].push(this.get(i,j) + otherMatrix.get(i,j));
+			}
+		}
+		return new Matrix(temp_mat)
+	}
+	static iden(size){
+		let temp_mat = []
+		for(let i = 0; i<size; i++){
+			temp_mat.push([])
+			for(let j= 0; j<size; j++){
+				if(i==j){
+					temp_mat[i].push(1)
+				}else{
+					temp_mat[i].push(0)
+				}
+			}
+		}
+		return new Matrix(temp_mat)
+	}
 
 }
