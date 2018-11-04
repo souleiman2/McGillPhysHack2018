@@ -20,7 +20,7 @@ class HyperPrism {
 
 
 	update(rotationMatrix) {
-		this.orientation = rotationMatrix.mult(this.orientation);
+		this.orientation = rotationMatrix.mult(this.orientation).normalize();
 	}
 
 	differByOne(p1, p2){
