@@ -1,26 +1,36 @@
-let orientation = Matrix.iden(5);
-let s;
-let c;
-let rot1, rot2;
-let h = new HyperPrism([200, 100, 300]);
+let h;
 
 //gui variables
-let dimension = 2;
-let length = 150;
+var dimension = 3;
+let dimension_ = dimension;
+var length = 150;
+var lineThickness = 2;
+var vertexSize = 5;
+var backgroundColor = '#DCDCDC';
+var lineColor = '#000000';
+var vertexColor = '#000000';
 let angularVelocity = 5;
 
 //max, min and step variables
 
+//line thickness
+var lineThicknessMax = 10;
+var lineThicknessMin = 1;
+var lineThicknessStep = 1;
+
+//vertex size
+var vertexSizeMax = 30;
+
 //dimension
-let dimensionMax = 10;
-let dimensionMin = 1;
-let dimensionStep = 1;
+var dimensionMax = 10;
+var dimensionMin = 1;
+var dimensionStep = 1;
 
 
 //length
-let lengthMax = 500;
-let lengthMin = 50;
-let lengthStep = 10;
+var lengthMax = 500;
+var lengthMin = 50;
+var lengthStep = 10;
 
 //angularVariable
 let angularVelocityMax = -20;
@@ -29,36 +39,68 @@ let angularVelocityStep = 1;
 
 let gui;
 
+let u;
+let v;
+
+let theta;
+
+let rot;
+
+function init() {
+
+	u = [];
+	v = [];
+	let lengths = [];
+
+	for (let i = 0; i < dimension; i++){
+		u.push(random(-1, 1));
+		v.push(random(-1, 1));
+	lengths.push(random(min(width,height)/2));
+	}
+
+	gui = createGui("Angular Velocity");
+	gui.addGlobals('backgroundColor', 'lineColor', 'vertexColor', 
+		'lineThickness','vertexSize', 'dimension');
+
+	for (let i = 0; i < dimension; i++) {
+		window["length" + i] = lengths[i];
+		window["length" + i + "Max"] = floor(min(width, height)/2);
+		window["length" + i + "Min"] = 1;
+		window["length" + i + "Step"] = 1;
+		gui.addGlobals('length' + i);
+		print('length' + i);
+	}
+	
+	h = new HyperPrism(lengths, Matrix.iden(dimension));
+	
+	u = new Vector(u).normalized();
+	v = new Vector(v).normalized();
+
+	theta = PI/60;
+	rot = Matrix.iden(dimension).add(v.outer(u).sub(u.outer(v)).scale(sin(theta))).add(
+		u.outer(u).add(v.outer(v)).scale(cos(theta) - 1));
+}
+
 function setup() {
 	createCanvas(windowWidth, windowHeight);
-
-	gui = createGui("Title");
-	gui.addGlobals('dimension', 'length', 'angularVelocity')
-
-	s = sin(PI/60);
-	c = cos(PI/60);
-	rot1 = new Matrix([[c, -s, 0, 0, 0], [s, c, 0, 0, 0], [0, 0, 1, 0, 0], [0, 0, 0, 1, 0], [0, 0, 0, 0, 1]]);
-	s = sin(PI/160);
-	c = cos(PI/160);
-	rot2 = new Matrix([[1, 0, 0, 0, 0], [0, c, 0, 0, -s], [0, 0, 1, 0, 0], [0, 0, 0, 1, 0], [0, s, 0, 0, c]]);
-	s = sin(PI/260);
-	c = cos(PI/260);
-	rot3 = new Matrix([[1, 0, 0, 0, 0], [0, 1, 0, 0, 0],[0, 0, c, -s, 0], [0, 0, s, c, 0], [0, 0, 0, 0, 1]]);
-	s = sin(PI/60);
-	c = cos(PI/60);
-	rot4 = new Matrix([[1, 0, 0, 0, 0], [0, 1, 0, 0, 0], [0, 0, 1, 0, 0], [0, 0, 0, c,-s], [0, 0, 0, s, c]]);
+	init();
 }
 
 function draw() {
-	background(220);
-	let v = new Vector([1, 1, 1]).normalized();
-	let u = new Vector([1, 1, -1]).normalized();
-	let theta = PI/60;
-	let rot = Matrix.iden(3).add(v.outer(u).sub(u.outer(v)).scale(sin(theta))).add(
-		u.outer(u).add(v.outer(v)).scale(cos(theta) - 1));
-	for(let i = 0; i < 100; i++) {
-		h.update(rot);
+	background(backgroundColor);
+
+	if (dimension != dimension_) {
+		dimension_ = dimension;
+		document.querySelector(".qs_main").outerHTML = "";
+		init();
 	}
-	//h.update(rot3.mult(rot1.mult(rot2.mult(rot4))));
+
+	let lengths = [];
+	for (let i = 0; i < dimension; i++) {
+		lengths.push(window["length" + i]);
+	}
+	h.lengths = lengths;
+
+	h.update(rot);
 	h.render();
 }
