@@ -58,6 +58,7 @@ class Matrix{
 	sub(otherMatrix){
 		return this.add(otherMatrix.scale(-1));
 	}
+
 	normalize(){
 		let temp_mat = []
 		for(let i = 0; i<this.n; i++){
@@ -78,6 +79,11 @@ class Matrix{
 				temp_mat[j][i] = vector.get(j);
 			}
 		}
+		for(let i = 0; i<this.n; i++){
+			let vector = new Vector(temp_mat[i]).normalized()
+			temp_mat[i] = vector.values;
+		}
+
 		return new Matrix(temp_mat);
 	}
 	static iden(size){
