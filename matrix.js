@@ -59,7 +59,26 @@ class Matrix{
 		return this.add(otherMatrix.scale(-1));
 	}
 	normalize(){
-		//TODO normalize the column vectors in the matrix
+		let temp_mat = []
+		for(let i = 0; i<this.n; i++){
+			temp_mat.push([])
+			for(let j = 0; j <this.n; j++){
+				temp_mat[i].push(0);
+			}
+		}
+		for(let i = 0; i<this.n; i++){
+			let column = []
+			for(let j=0; j<this.n; j++){
+				column.push(this.get(j,i))
+			}
+
+			let vector = new Vector(column);
+			vector = vector.normalized();
+			for(let j = 0; j<this.n; j++){
+				temp_mat[j][i] = vector.get(j);
+			}
+		}
+		return new Matrix(temp_mat);
 	}
 	static iden(size){
 		let temp_mat = []
