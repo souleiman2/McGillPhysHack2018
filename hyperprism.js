@@ -42,8 +42,9 @@ class HyperPrism {
 
 		strokeWeight(lineThickness);
 		stroke(lineColor);
-		for (let i = 0; i < this.points.length; i++) {
-			for (let j = 0; j < this.points.length; j++) {
+
+		for (let i = 0; i < this.points.length - 1; i++) {
+			for (let j = i + 1; j < this.points.length; j++) {
 				if(this.differByOne(this.points[i], this.points[j])) {
 					line(newPoints[i].get(0), newPoints[i].get(1),
 						newPoints[j].get(0), newPoints[j].get(1));
