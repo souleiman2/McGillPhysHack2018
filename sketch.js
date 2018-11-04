@@ -5,7 +5,7 @@ var dimension = 3;
 let dimension_ = dimension;
 var length = 150;
 var lineThickness = 1;
-var vertexSize = 0;
+var vertexSize = 1;
 var backgroundColor = '#DCDCDC';
 var lineColor = '#000000';
 var vertexColor = '#000000';
@@ -16,11 +16,12 @@ var paused = false;
 
 //line thickness
 var lineThicknessMax = 10;
-var lineThicknessMin = 1;
+var lineThicknessMin = 0;
 var lineThicknessStep = 1;
 
 //vertex size
 var vertexSizeMax = 30;
+var vertexSizeMin = 0;
 
 //dimension
 var dimensionMax = 8;
