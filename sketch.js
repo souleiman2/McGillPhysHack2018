@@ -24,7 +24,7 @@ var vertexSizeMax = 30;
 var vertexSizeMin = 0;
 
 //dimension
-var dimensionMax = 8;
+var dimensionMax = 12;
 var dimensionMin = 2;
 var dimensionStep = 1;
 
